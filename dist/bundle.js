@@ -925,7 +925,7 @@ var VisibilitySensor = function (_React$Component) {
     key: "render",
     value: function render() {
       var refWrapper = function refWrapper(children) {
-        return { children: children };
+        return children;
       };
       if (this.props.children instanceof Function) {
         return refWrapper(this.props.children({
