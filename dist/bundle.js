@@ -924,14 +924,8 @@ var VisibilitySensor = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var refWrapper = function refWrapper(children) {
-        return _react2.default.createElement(
-          "div",
-          { ref: _this2.nodeRef },
-          children
-        );
+        return { children: children };
       };
       if (this.props.children instanceof Function) {
         return refWrapper(this.props.children({
