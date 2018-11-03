@@ -866,12 +866,15 @@ var VisibilitySensor = function (_React$Component) {
       isVisible: null,
       visibilityRect: {}
     };
+
+    _this.nodeRef = _react2.default.createRef();
     return _this;
   }
 
   _createClass(VisibilitySensor, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.node = this.nodeRef.current;
       if (this.props.active) {
         this.startWatching();
       }
@@ -885,6 +888,7 @@ var VisibilitySensor = function (_React$Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       // re-register node in componentDidUpdate if children diffs [#103]
+      this.node = this.nodeRef.current;
 
       if (this.props.active && !prevProps.active) {
         this.setState({
@@ -920,9 +924,7 @@ var VisibilitySensor = function (_React$Component) {
       var refWrapper = function refWrapper(children) {
         return _react2.default.createElement(
           "div",
-          { ref: function ref(node) {
-              _this2.node = node;
-            } },
+          { ref: _this2.nodeRef },
           children
         );
       };
