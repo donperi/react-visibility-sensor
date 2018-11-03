@@ -874,10 +874,6 @@ var VisibilitySensor = function (_React$Component) {
   _createClass(VisibilitySensor, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // this.node = this.nodeRef.current;
-      this.node = _reactDom2.default.findDOMNode(this);
-
-      console.log('mount', this.node);
       if (this.props.active) {
         this.startWatching();
       }
@@ -891,9 +887,6 @@ var VisibilitySensor = function (_React$Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       // re-register node in componentDidUpdate if children diffs [#103]
-      // this.node = this.nodeRef.current
-      this.node = _reactDom2.default.findDOMNode(this);
-      console.log('update', this.node);
 
       if (this.props.active && !prevProps.active) {
         this.setState({
@@ -924,15 +917,21 @@ var VisibilitySensor = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
+      var sensorRef = function sensorRef(nodeRef) {
+        _this2.node = _this2.node;
+      };
+
       if (this.props.children instanceof Function) {
         return this.props.children({
-          sensorRef: this.nodeRef,
+          sensorRef: sensorRef,
           isVisible: this.state.isVisible,
           visibilityRect: this.state.visibilityRect
         });
       }
 
-      return _react2.default.cloneElement(_react2.default.Children.only(this.props.children), { ref: this.nodeRef });
+      return _react2.default.cloneElement(_react2.default.Children.only(this.props.children), { ref: sensorRef });
     }
   }]);
 
@@ -981,7 +980,7 @@ VisibilitySensor.propTypes = {
   intervalCheck: _propTypes2.default.bool,
   intervalDelay: _propTypes2.default.number,
   containment: typeof window !== "undefined" ? _propTypes2.default.instanceOf(window.Element) : _propTypes2.default.any,
-
+  children: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func]),
   minTopValue: _propTypes2.default.number
 };
 exports.default = VisibilitySensor;
