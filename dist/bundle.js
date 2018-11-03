@@ -920,7 +920,7 @@ var VisibilitySensor = function (_React$Component) {
       var _this2 = this;
 
       var sensorRef = function sensorRef(nodeRef) {
-        _this2.node = _this2.node;
+        _this2.node = nodeRef;
       };
 
       if (this.props.children instanceof Function) {
