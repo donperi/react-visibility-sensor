@@ -924,16 +924,15 @@ var VisibilitySensor = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var refWrapper = function refWrapper(children) {
-        return children;
-      };
       if (this.props.children instanceof Function) {
-        return refWrapper(this.props.children({
+        return this.props.children({
+          sensorRef: this.nodeRef,
           isVisible: this.state.isVisible,
           visibilityRect: this.state.visibilityRect
-        }));
+        });
       }
-      return refWrapper(_react2.default.Children.only(this.props.children));
+
+      return _react2.default.cloneElement(_react2.default.Children.only(this.props.children), { ref: this.nodeRef });
     }
   }]);
 
@@ -982,7 +981,7 @@ VisibilitySensor.propTypes = {
   intervalCheck: _propTypes2.default.bool,
   intervalDelay: _propTypes2.default.number,
   containment: typeof window !== "undefined" ? _propTypes2.default.instanceOf(window.Element) : _propTypes2.default.any,
-  children: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func]),
+
   minTopValue: _propTypes2.default.number
 };
 exports.default = VisibilitySensor;
