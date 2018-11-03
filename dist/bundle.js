@@ -874,7 +874,10 @@ var VisibilitySensor = function (_React$Component) {
   _createClass(VisibilitySensor, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.node = this.nodeRef.current;
+      // this.node = this.nodeRef.current;
+      this.node = _reactDom2.default.findDOMNode(this);
+
+      console.log('mount', this.node);
       if (this.props.active) {
         this.startWatching();
       }
@@ -888,7 +891,9 @@ var VisibilitySensor = function (_React$Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       // re-register node in componentDidUpdate if children diffs [#103]
-      this.node = this.nodeRef.current;
+      // this.node = this.nodeRef.current
+      this.node = _reactDom2.default.findDOMNode(this);
+      console.log('update', this.node);
 
       if (this.props.active && !prevProps.active) {
         this.setState({
